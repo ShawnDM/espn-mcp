@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  sports-mcp-server:
+    build: .
+    container_name: sports-mcp-server
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
