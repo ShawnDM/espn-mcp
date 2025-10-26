@@ -1,8 +1,6 @@
-runtime: "typescript"
-buildCommand:
-  command: "npm"
-  args: ["run", "build"]
+runtime: "container"
+build:
+  dockerfile: "Dockerfile"
+  dockerBuildPath: "."
 startCommand:
   type: "stdio"
-  commandFunction: |
-    (config) => ({ command: 'node', args: ['dist/index.js'] })
