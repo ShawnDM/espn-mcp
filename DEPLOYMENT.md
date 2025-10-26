@@ -38,7 +38,7 @@ git push -u origin main
 
 ### 4. Configure Deployment
 
-Smithery.ai will automatically detect the MCP server configuration from `smithery.json`. The configuration includes:
+Smithery.ai will automatically detect the MCP server configuration from `smithery.yaml`. The configuration includes:
 
 - **Server Name**: `sports-mcp-server`
 - **Description**: Access live sports data from ESPN API
@@ -63,24 +63,17 @@ Once deployed, you can test your server by:
 
 ## Configuration Details
 
-### smithery.json Structure
+### smithery.yaml Structure
 
-```json
-{
-  "name": "sports-mcp-server",
-  "description": "MCP server for live sports data from ESPN API",
-  "mcp": {
-    "name": "sports-mcp-server",
-    "version": "1.0.0",
-    "description": "Access live sports data from ESPN API",
-    "capabilities": {
-      "tools": true
-    },
-    "tools": [
-      // Tool definitions...
-    ]
-  }
-}
+```yaml
+startCommand:
+  type: "stdio"
+  configSchema:
+    type: "object"
+    properties: {}
+  commandFunction: |
+    (config) => ({ command: 'node', args: ['dist/index.js'] })
+  exampleConfig: {}
 ```
 
 ### Environment Variables
