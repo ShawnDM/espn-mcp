@@ -11,8 +11,8 @@ import axios from 'axios';
 import { z } from 'zod';
 
 // ESPN API Base URLs
-const ESPN_API_BASE = 'http://site.api.espn.com/apis/site/v2/sports';
-const ESPN_CORE_API_BASE = 'http://sports.core.api.espn.com/v2/sports';
+const ESPN_API_BASE = 'https://site.api.espn.com/apis/site/v2/sports';
+const ESPN_CORE_API_BASE = 'https://sports.core.api.espn.com/v2/sports';
 
 // Sports configuration
 const SPORTS_CONFIG = {
@@ -396,9 +396,14 @@ class SportsMCPServer {
   }
 
   async run() {
-    const transport = new StdioServerTransport();
-    await this.server.connect(transport);
-    console.error('Sports MCP Server running on stdio');
+    try {
+      const transport = new StdioServerTransport();
+      await this.server.connect(transport);
+      console.error('Sports MCP Server running on stdio');
+    } catch (error) {
+      console.error('Failed to start Sports MCP Server:', error);
+      process.exit(1);
+    }
   }
 }
 
